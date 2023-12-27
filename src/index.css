@@ -63,8 +63,8 @@ input[type='submit'] {
 }
 
 .winner {
-  margin-bottom: 1rem;
-  width: 150px;
+  margin-bottom: 0.2rem;
+  width: 155px;
   display: flex;
   align-items: center;
   justify-content: center;
