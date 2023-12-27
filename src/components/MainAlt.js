@@ -1,13 +1,13 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 function MainAlt(params) {
-    let is_circle;
-    var arr = []
+    const [arr, setArr] = useState([])
+    const [name, setName] = useState('circle')
     const draw = (e, id) => {
         if (arr.includes(id)) { }
         else {
-            arr.push(id)
-            if (is_circle) {
+            setArr([...arr, id])
+            if (name == 'cross') {
                 const ele = document.createElement('div')
                 ele.className = 'cross'
                 // \u2718
@@ -15,7 +15,7 @@ function MainAlt(params) {
                 ele.appendChild(node)
                 const par = document.getElementById(id)
                 par.appendChild(ele)
-                is_circle = false;
+                setName('circle')
             }
             else {
                 const inele = document.createElement('div')
@@ -24,28 +24,30 @@ function MainAlt(params) {
                 inele.appendChild(node)
                 const par = document.getElementById(id)
                 par.appendChild(inele)
-                is_circle = true;
+                setName('cross')
             }
         }
     }
 
     const reset = () => {
-        console.log(arr,'res')
         for (let id in arr) {
             let ele = document.getElementById(arr[id])
             ele?.replaceChildren()
         }
-        arr = []
+        setArr([])
     }
 
     const Undo = () => {
         document.getElementById(arr.at(-1))?.replaceChildren()
-        arr.pop()
-        if (is_circle) {
-            is_circle = false
+        let idx = arr.length - 1
+        const temp = [...arr]
+        temp.splice(idx,1)
+        setArr(temp)
+        if (name == 'circle') {
+            setName('cross')
         }
         else {
-            is_circle = true
+            setName('circle')
         }
     }
 
@@ -76,36 +78,40 @@ function MainAlt(params) {
 
     }
 
-    setInterval(() => {
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
+    useEffect(() => {
+        const func = async () => {
+            let xWon = false
+            let oWon = false
             for (let idx in allArr) {
-                if (check(allArr[idx]) == 'Player 1 Won') {
-                    arr = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th','10th']
+                const out = check(allArr[idx])
+                if (out == 'Player 1 Won') {
+                    xWon = true
                     document.querySelector('.winner').innerHTML = 'X Won'
-                    setTimeout(() => {
-                        document.querySelector('.winner').innerHTML = ''
-                        reset()
-                    }, 2000)
+                    await delay(2000)
+                    reset()
+                    document.querySelector('.winner').innerHTML = ''
                     break
                 }
-                else if (check(allArr[idx]) == 'Player 2 Won') {
-                    arr = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th','10th']
+                else if (out == 'Player 2 Won') {
+                    oWon = true
                     document.querySelector('.winner').innerHTML = `O Won`
-                    setTimeout(() => {
-                        document.querySelector('.winner').innerHTML = ''
-                        reset()
-                    }, 2000)
+                    await delay(2000)
+                    reset()
+                    document.querySelector('.winner').innerHTML = ''
                     break
                 }
-                // else if ((check(allArr[idx]) == 'None') && arr.length==9) {
-                //     document.querySelector('.winner').innerHTML = `Match Drawn`
-                //     setTimeout(() => {
-                //         document.querySelector('.winner').innerHTML = ''
-                //         reset()
-                //     }, 2000)
-                //     break
-                // }
+            }
+            if ((xWon==false) && (oWon==false) && (arr.length == 9)) {
+                document.querySelector('.winner').innerHTML = `Match Drawn`
+                await delay(2000)
+                reset()
+                document.querySelector('.winner').innerHTML = ''
+            }
         }
-    }, 1000);
+        func()
+    }, [arr]);
 
 
     return (
@@ -115,33 +121,33 @@ function MainAlt(params) {
                 तत्स॑ वि॒तुर्वरे᳚ण्यं॒
                 भर्गो॑ दे॒वस्य॑ धीमहि
                 धियो॒ यो नः॑ प्रचो॒दया᳚त् ॥
-            </h1> 
-            <div id="note">NOTE :- Please wait 1-2 seconds after the game is finished. Reset when game draws.</div>
+            </h1>
+            <div id="note">NOTE :- Please wait 2-3 seconds after the game is finished.</div>
             <div className="tb">
                 <div className="winner"></div>
                 <table>
                     <tr>
-                        <td id='1st' onClick={(e) => draw(e, '1st')}>
+                        <td className="td" id='1st' onClick={(e) => draw(e, '1st')}>
                         </td>
-                        <td id='2nd' onClick={(e) => draw(e, '2nd')}>
+                        <td className="td" id='2nd' onClick={(e) => draw(e, '2nd')}>
                         </td>
-                        <td id='3rd' onClick={(e) => draw(e, '3rd')}>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td id='4th' onClick={(e) => draw(e, '4th')}>
-                        </td>
-                        <td id='5th' onClick={(e) => draw(e, '5th')}>
-                        </td>
-                        <td id='6th' onClick={(e) => draw(e, '6th')}>
+                        <td className="td" id='3rd' onClick={(e) => draw(e, '3rd')}>
                         </td>
                     </tr>
                     <tr>
-                        <td id="7th" onClick={(e) => draw(e, '7th')}>
+                        <td className="td" id='4th' onClick={(e) => draw(e, '4th')}>
                         </td>
-                        <td id="8th" onClick={(e) => draw(e, '8th')}>
+                        <td className="td" id='5th' onClick={(e) => draw(e, '5th')}>
                         </td>
-                        <td id="9th" onClick={(e) => draw(e, '9th')}>
+                        <td className="td" id='6th' onClick={(e) => draw(e, '6th')}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="td" id="7th" onClick={(e) => draw(e, '7th')}>
+                        </td>
+                        <td className="td" id="8th" onClick={(e) => draw(e, '8th')}>
+                        </td>
+                        <td className="td" id="9th" onClick={(e) => draw(e, '9th')}>
                         </td>
                     </tr>
                 </table>
