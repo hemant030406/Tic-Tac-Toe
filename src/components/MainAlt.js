@@ -96,14 +96,14 @@ function MainAlt(params) {
                     }, 2000)
                     break
                 }
-                else if ((check(allArr[idx]) == 'None') && arr.length==9) {
-                    document.querySelector('.winner').innerHTML = `Match Drawn`
-                    setTimeout(() => {
-                        document.querySelector('.winner').innerHTML = ''
-                        reset()
-                    }, 2000)
-                    break
-                }
+                // else if ((check(allArr[idx]) == 'None') && arr.length==9) {
+                //     document.querySelector('.winner').innerHTML = `Match Drawn`
+                //     setTimeout(() => {
+                //         document.querySelector('.winner').innerHTML = ''
+                //         reset()
+                //     }, 2000)
+                //     break
+                // }
         }
     }, 1000);
 
@@ -115,8 +115,8 @@ function MainAlt(params) {
                 तत्स॑ वि॒तुर्वरे᳚ण्यं॒
                 भर्गो॑ दे॒वस्य॑ धीमहि
                 धियो॒ यो नः॑ प्रचो॒दया᳚त् ॥
-            </h1>
-            <div id="note">NOTE :- Please wait 1-2 seconds after the game is finished.</div>
+            </h1> 
+            <div id="note">NOTE :- Please wait 1-2 seconds after the game is finished. Reset when game draws.</div>
             <div className="tb">
                 <div className="winner"></div>
                 <table>
