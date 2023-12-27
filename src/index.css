@@ -29,7 +29,7 @@ td {
 .tb {
   position: absolute;
   top: 40%;
-  left: 50%;
+  left: 54%;
   transform: translate(-50%, -50%);
   z-index: 1;
 }
@@ -45,7 +45,7 @@ td {
 }
 
 .res {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   width: 150px;
   display: flex;
   align-items: center;
@@ -68,7 +68,7 @@ input[type='submit'] {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: x-large;
+  font-size: large;
   font-weight: bolder;
   color: rgb(251 220 0);
 }
@@ -116,6 +116,19 @@ input[type='submit'] {
   width: 100vw;
   margin-top: 5rem;
 }
+.player{
+  font-size: large;
+  font-weight: 700;
+  color: #9ee00f;
+}
+#player{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  margin-left: -1.5rem;
+  margin-bottom: 0.7rem;
+}
 
 @media screen and (min-width:500px) {
   #complete {
@@ -130,12 +143,12 @@ input[type='submit'] {
 
 @media screen and (max-width:500px) {
   .tb {
-    top: 45%;
+    top: 47%;
   }
 
   #note {
     margin: 1rem;
-    margin-top: 35vh;
+    margin-top: 40vh;
   }
 
   #complete {

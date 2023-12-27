@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react"
 function MainAlt(params) {
     const [arr, setArr] = useState([])
     const [name, setName] = useState('circle')
+    const [ct1, setCt1] = useState(0)
+    const [ct2, setCt2] = useState(0)
     const draw = (e, id) => {
         if (arr.includes(id)) { }
         else {
@@ -41,7 +43,7 @@ function MainAlt(params) {
         document.getElementById(arr.at(-1))?.replaceChildren()
         let idx = arr.length - 1
         const temp = [...arr]
-        temp.splice(idx,1)
+        temp.splice(idx, 1)
         setArr(temp)
         if (name == 'circle') {
             setName('cross')
@@ -67,9 +69,11 @@ function MainAlt(params) {
             }
         }
         if (countcross == 3) {
+            setCt1(ct1 => ct1 + 1)
             return 'Player 1 Won'
         }
         else if (countcirc == 3) {
+            setCt2(ct2 => ct2 + 1)
             return 'Player 2 Won'
         }
         else {
@@ -103,7 +107,7 @@ function MainAlt(params) {
                     break
                 }
             }
-            if ((xWon==false) && (oWon==false) && (arr.length == 9)) {
+            if ((xWon == false) && (oWon == false) && (arr.length == 9)) {
                 document.querySelector('.winner').innerHTML = `Match Drawn`
                 await delay(2000)
                 reset()
@@ -125,6 +129,10 @@ function MainAlt(params) {
             <div id="note">NOTE :- Please wait 2-3 seconds after the game is finished.</div>
             <div className="tb">
                 <div className="winner"></div>
+                <div id="player">
+                    <div className="player" style={{ display: 'inline'}}>Player X: {ct1}</div>
+                    <div className="player" style={{ display: 'inline', marginLeft: '1rem' }}>Player O: {ct2}</div>
+                </div>
                 <table>
                     <tr>
                         <td className="td" id='1st' onClick={(e) => draw(e, '1st')}>
