@@ -4,11 +4,9 @@ function MainAlt(params) {
     let is_circle;
     var arr = []
     const draw = (e, id) => {
-        console.log(arr, 'draw')
         if (arr.includes(id)) { }
         else {
             arr.push(id)
-            console.log(arr, 'draw')
             if (is_circle) {
                 const ele = document.createElement('div')
                 ele.className = 'cross'
@@ -32,10 +30,9 @@ function MainAlt(params) {
     }
 
     const reset = () => {
-        console.log(arr)
         for (let id in arr) {
             let ele = document.getElementById(arr[id])
-            ele.replaceChildren()
+            ele?.replaceChildren()
         }
         arr = []
     }
@@ -85,7 +82,6 @@ function MainAlt(params) {
                     arr = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th','10th']
                     setTimeout(() => {
                         document.querySelector('.winner').innerHTML = ''
-                        arr = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th']
                         reset()
                     }, 2000)
                     break
@@ -95,7 +91,6 @@ function MainAlt(params) {
                     arr = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th','10th']
                     setTimeout(() => {
                         document.querySelector('.winner').innerHTML = ''
-                        arr = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th']
                         reset()
                     }, 2000)
                     break
