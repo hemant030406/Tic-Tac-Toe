@@ -30,6 +30,7 @@ function MainAlt(params) {
     }
 
     const reset = () => {
+        console.log(arr,'res')
         for (let id in arr) {
             let ele = document.getElementById(arr[id])
             ele?.replaceChildren()
@@ -78,8 +79,8 @@ function MainAlt(params) {
     setInterval(() => {
             for (let idx in allArr) {
                 if (check(allArr[idx]) == 'Player 1 Won') {
-                    document.querySelector('.winner').innerHTML = 'X Won'
                     arr = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th','10th']
+                    document.querySelector('.winner').innerHTML = 'X Won'
                     setTimeout(() => {
                         document.querySelector('.winner').innerHTML = ''
                         reset()
@@ -87,8 +88,8 @@ function MainAlt(params) {
                     break
                 }
                 else if (check(allArr[idx]) == 'Player 2 Won') {
-                    document.querySelector('.winner').innerHTML = `O Won`
                     arr = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th','10th']
+                    document.querySelector('.winner').innerHTML = `O Won`
                     setTimeout(() => {
                         document.querySelector('.winner').innerHTML = ''
                         reset()
