@@ -45,7 +45,7 @@ td {
 }
 
 .res {
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   width: 150px;
   display: flex;
   align-items: center;
@@ -53,7 +53,7 @@ td {
 }
 
 input[type='submit'] {
-  margin: 0px 0.3rem;
+  margin: 0px 0.5rem;
   background-color: rgb(251 220 0);
   border: 2px solid rgb(251 220 0);
   font-weight: bolder;
