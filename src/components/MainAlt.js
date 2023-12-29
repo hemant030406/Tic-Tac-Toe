@@ -130,8 +130,8 @@ function MainAlt(params) {
             <div className="tb">
                 <div className="winner"></div>
                 <div id="player">
-                    <div className="player" style={{ display: 'inline'}}>Player X: {ct1}</div>
-                    <div className="player" style={{ display: 'inline', marginLeft: '1rem' }}>Player O: {ct2}</div>
+                    <div className="player" style={{ display: 'inline'}}>X: {ct1}</div>
+                    <div className="player" style={{ display: 'inline', marginLeft: '1rem' }}>O: {ct2}</div>
                 </div>
                 <table>
                     <tr>
