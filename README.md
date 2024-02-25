@@ -1,5 +1,5 @@
 # Website Link
-The website : [Tic-Tacc-Toe](https://tictactoe-x576.onrender.com/)
+The website : [Tic-Tac-Toe](https://tictactoe-x576.onrender.com/)
 
 # Getting Started with Create React App
 
