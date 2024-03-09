@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react"
+import './GlobalVariable'
+import { useNavigate } from "react-router-dom"
 
 function MainAlt(params) {
     const [arr, setArr] = useState([])
     const [name, setName] = useState('circle')
     const [ct1, setCt1] = useState(0)
     const [ct2, setCt2] = useState(0)
+    // console.log(global.authenticated)
+
+    let nav = useNavigate()
+
     const draw = (e, id) => {
         if (arr.includes(id)) { }
         else {
@@ -85,9 +91,28 @@ function MainAlt(params) {
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
     useEffect(() => {
+        if (!global.authenticated) {
+            nav('/')
+        }
         const func = async () => {
             let xWon = false
             let oWon = false
+
+            console.log(arr)
+            let formdata = new FormData()
+            formdata.append('name', 'h1')
+            formdata.append('arr', arr)
+
+            fetch('https://tictactoe-backend-utka.onrender.com/play_on', {
+                method: 'POST',
+                body: formdata
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.arr.split(','))
+                    // setArr(data.arr.split(','))
+                })
+
             for (let idx in allArr) {
                 const out = check(allArr[idx])
                 if (out == 'Player 1 Won') {
@@ -130,7 +155,7 @@ function MainAlt(params) {
             <div className="tb">
                 <div className="winner"></div>
                 <div id="player">
-                    <div className="player" style={{ display: 'inline'}}>X: {ct1}</div>
+                    <div className="player" style={{ display: 'inline' }}>X: {ct1}</div>
                     <div className="player" style={{ display: 'inline', marginLeft: '1rem' }}>O: {ct2}</div>
                 </div>
                 <table>
