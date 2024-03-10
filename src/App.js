@@ -1,10 +1,8 @@
 // import logo from './logo.svg';
 import './App.css';
-import CreateRoom from './components/CreateRoom';
-import JoinRoom from './components/JoinRoom';
-import Footer from './components/Footer/Footer';
-import Main from './components/Home/Main';
-import MainAlt from './components/Home/Home';
+import CreateRoom from './components/Room/CreateRoom/CreateRoom';
+// import Footer from './components/Footer/Footer';
+import Home from './components/Home/Home';
 import {
   BrowserRouter as Router,
   Routes,
@@ -13,11 +11,12 @@ import {
 
 function App() {
   return (
-      // {/* <Main></Main> */}c
-      <>
-      <MainAlt></MainAlt>
-      <Footer></Footer>
-      </>
+    <Router>
+      <Routes>
+        <Route path='/' element = {<CreateRoom/>}/>
+        <Route path='/room/:roomName' element={<Home />} />
+      </Routes>
+    </Router>
   );
 }
 

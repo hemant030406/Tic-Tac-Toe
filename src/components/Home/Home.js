@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react"
 import './Home.css'
+import '../Auth/GlobalVariable'
+import { useNavigate } from "react-router-dom"
 
-function MainAlt(params) {
+const Home = (props) => {
     const [moves, setMoves] = useState([])
     const [type, setType] = useState('circle')
     const [ct1, setCt1] = useState(0)
     const [ct2, setCt2] = useState(0)
     const winningCond = [['1st', '2nd', '3rd'], ['4th', '5th', '6th'], ['7th', '8th', '9th'], ['1st', '4th', '7th'], ['2nd', '5th', '8th'], ['3rd', '6th', '9th'], ['1st', '5th', '9th'], ['3rd', '5th', '7th']]
+
+    let nav = useNavigate()
 
     const displayMove = (player, displayText, id, opposPlayer,currTurn,nextTurn) => {
         let turnele = document.querySelector(currTurn)
@@ -105,9 +109,29 @@ function MainAlt(params) {
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
     useEffect(() => {
+        if (!global.authenticated) {
+            nav('/')
+        }
+
         const func = async () => {
             let xWon = false
             let oWon = false
+
+            console.log(moves)
+            let formdata = new FormData()
+            formdata.append('name', 'h1')
+            formdata.append('moves', moves)
+
+            fetch('https://tictactoe-backend-utka.onrender.com/play_on', {
+                method: 'POST',
+                body: formdata
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.arr.split(','))
+                    // setArr(data.arr.split(','))
+                })
+
             for (let idx in winningCond) {
                 const result = winCheck(winningCond[idx])
                 if (result[0] === 1) {
@@ -189,4 +213,4 @@ function MainAlt(params) {
     )
 }
 
-export default MainAlt;
+export default Home;

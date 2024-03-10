@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate,Link } from "react-router-dom";
-import './GlobalVariable'
+import '../../Auth/GlobalVariable'
 
-const JoinRoom = () => {
+const CreateRoom = () => {
 
+    const [opt,setOpt] = useState('Create')
     let roomName='';
     let code='';
     let nav = useNavigate()
+
+    const changeOpt = () => {
+        setOpt(opt == 'Create' ? 'Join'  : 'Create')
+    }
 
     const handleclick = () => {
         if (roomName != '') {
@@ -19,7 +24,7 @@ const JoinRoom = () => {
                 body: formdata,
             };
 
-            fetch("https://tictactoe-backend-utka.onrender.com/join", requestOptions)
+            fetch(`https://tictactoe-backend-utka.onrender.com/${opt}`, requestOptions)
                 .then(data => data.json())
                 .then(data => {
                     if (data.ok) {
@@ -47,14 +52,14 @@ const JoinRoom = () => {
             }}></input><br></br>
             <div id="crb">
                 <button style={{cursor:'pointer'}} onClick={()=>{handleclick()}}>
-                    Join Room</button>
+                    {opt} Room</button>
             </div> 
             <div id="crtOrJn">
-                Want to create a room?<Link to='/'>create room</Link>
+                Want to {opt} a room?<p style={{display:'inline',textDecoration:'underline',color:'blue',cursor:'pointer',marginLeft:'0.5rem'}} onClick={()=>changeOpt()}>{opt} room</p>
             </div>
         </div>
         </div>
     )
 }
 
-export default JoinRoom
+export default CreateRoom
