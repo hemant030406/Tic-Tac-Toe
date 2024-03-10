@@ -2,9 +2,9 @@
 import './App.css';
 import CreateRoom from './components/CreateRoom';
 import JoinRoom from './components/JoinRoom';
-import Footer from './components/Footer';
-import Main from './components/Main';
-import MainAlt from './components/MainAlt';
+import Footer from './components/Footer/Footer';
+import Main from './components/Home/Main';
+import MainAlt from './components/Home/Home';
 import {
   BrowserRouter as Router,
   Routes,
@@ -13,13 +13,11 @@ import {
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path='/' element={<CreateRoom></CreateRoom>}></Route>
-        <Route path='/room/:roomName' element={<><MainAlt></MainAlt><Footer></Footer></>}></Route>
-        <Route path='/joinroom' element={<JoinRoom></JoinRoom>}></Route>
-      </Routes>
-    </Router>
+      // {/* <Main></Main> */}c
+      <>
+      <MainAlt></MainAlt>
+      <Footer></Footer>
+      </>
   );
 }
 

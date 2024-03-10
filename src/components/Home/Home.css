@@ -1,0 +1,163 @@
+.tblayout{
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  height: 100vh;
+  width: 100vw;
+}
+
+table,
+td {
+  border: 2px solid rgb(251 220 0);
+}
+
+td {
+  height: 6rem;
+  width: 6rem;
+  cursor: pointer;
+}
+
+/* .tb {
+  position: absolute;
+  top: 40%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+} */
+.tb{
+  margin-top: 10rem;
+}
+
+.cross,
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 300%;
+  font-weight: bold;
+  color: rgb(251 220 0);
+}
+
+.res {
+  margin-top: 1rem;
+  width: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rem 1rem;
+}
+
+.res input[type='submit'] {
+  background-color: rgb(251 220 0);
+  border: 2px solid rgb(251 220 0);
+  font-weight: bolder;
+  font-size: xx-large;
+  cursor: pointer;
+  border-radius: 25%/50%;
+  padding: 0.5rem;
+}
+
+.winner {
+  margin-bottom: 0.3rem;
+  width: inherit;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 150%;
+  font-weight: bolder;
+  color: rgb(251 220 0);
+}
+
+/* #mantra {
+  text-align: center;
+  margin-top: -0.5rem;
+  color: #bc0b0b;
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+/* #note {
+  text-align: center;
+  margin-top: 30vh;
+  color: #bc0b0b;
+  font-size: x-large;
+  font-weight: 500;
+  height: 13vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.scoreX,.scoreO{
+  font-size: xx-large;
+  font-weight: 700;
+  color: red;
+}
+.scoreO{
+  color: #9ee00f;
+}
+#score{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: inherit;
+  /* margin-left: -1.5rem; */
+  margin-bottom: 0.7rem;
+  padding: 0rem 1rem;
+}
+
+/* @media screen and (min-width:500px) {
+  .tb{
+    top: 42%;
+  }
+} */
+
+/* @media screen and (max-width:500px) {
+  .tb {
+    top: 47%;
+  }
+
+  #note {
+    margin: 1rem;
+    margin-top: 40vh;
+  }
+
+} */
+
+/* @media screen and (max-width: 375px) {
+  .tb{
+    top: 50%;
+    margin-bottom: 5rem;
+  }
+  #note{
+    margin-top: 44vh;
+  }
+} */
+
+@media screen and (max-height:700px) {
+  .tb{
+    margin-top: 5rem;
+  }
+}
+
+@media screen and (max-width:400px) {
+  td{
+    height: 4rem;
+    width: 4rem;
+  }
+  .res input[type='submit'] {
+  background-color: rgb(251 220 0);
+  border: 2px solid rgb(251 220 0);
+  font-weight: bolder;
+  font-size: x-large;
+  cursor: pointer;
+  border-radius: 25%/50%;
+  padding: 0.5rem;
+}
+.circle,.cross{
+  font-size: 200%;
+}
+}
