@@ -1,0 +1,14 @@
+.msg{
+    border-radius: 2rem;
+    width: 15rem;
+    /* height: 2rem; */
+    background-color: rgba(25, 24, 24, 0.616);
+    color: white;
+    padding: 5px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
