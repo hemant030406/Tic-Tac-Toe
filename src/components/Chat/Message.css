@@ -1,13 +1,20 @@
 .msg{
     border-radius: 2rem;
     width: 13rem;
-    background-color: rgb(25 24 24 / 70%);
     color: white;
     padding: 5px 16px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
     margin: 0.5rem;
-    -ms-word-break: break-all;
+    /* -ms-word-break: break-all;
+    -ms-word-break: keep-all; */
+}
+
+.keep-all-words{
+    word-break: keep-all;
+}
+
+.break-long-words{
     word-break: break-all;
 }

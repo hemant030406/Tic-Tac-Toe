@@ -40,17 +40,17 @@ const Chat = (props) => {
       setAtBottom(Math.ceil(scrollHeight - scrollTop) === clientHeight)
     }
   };
-
+  
   return (
     <div className={`chat-container ${visible ? '' : 'hidden'}`}>
       <div ref={msghistory} className="msghistory" style={{ overflowY: 'scroll' }} onScroll={getScrollPosition}>
         {
           msges.map((obj, id) => {
             if (name == obj.name) {
-              return <Message key={id} msg={obj.msg} float='right' />
+              return <Message key={id} msg={obj.msg} username={obj.name} float='right' bgcolor='rgb(37 182 173 / 80%)' usercolor={'#535353'} />
             }
             else {
-              return <Message key={id} msg={obj.msg} float='left' />
+              return <Message key={id} msg={obj.msg} username={obj.name} float='left' bgcolor='rgb(25 24 24 / 70%)' usercolor={'rgb(187 187 187)'} />
             }
           }
           )

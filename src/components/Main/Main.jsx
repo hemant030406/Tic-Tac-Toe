@@ -6,6 +6,7 @@ import Nav from '../Nav/Nav';
 import { useNavigate } from 'react-router-dom';
 import Fetch from '../Fetch/Fetch';
 import { URL } from '../Utils/Utils';
+import { FaGithub } from "react-icons/fa6";
 
 const Main = () => {
 
@@ -42,6 +43,12 @@ const Main = () => {
               <FaPlay />
               <p style={{ margin: '0' }}>Play</p>
             </div>
+            <a target='blank' href='https://github.com/hemant030406/Tic-Tac-Toe/' style={{textDecoration:'none'}}>
+              <div className='main-git main-button'>
+                <FaGithub size={20} />
+                <p style={{ margin: '0' }}>Github</p>
+              </div>
+            </a>
           </div>
         </div>
       </div>
