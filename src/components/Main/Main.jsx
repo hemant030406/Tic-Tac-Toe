@@ -34,7 +34,7 @@ const Main = () => {
             <h2>New to our world? Read the instructions carefully to get the hang of things!</h2>
           </div>
           <div className='main-buttons'>
-            <div className='main-instrs main-button'>
+            <div className='main-instrs main-button' onClick={() => navigate('/docs')}>
               <SlDocs />
               <p style={{ margin: '0' }}>Docs</p>
             </div>

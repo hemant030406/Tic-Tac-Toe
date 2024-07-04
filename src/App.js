@@ -11,6 +11,7 @@ import Chat from './components/Chat/Chat';
 import { Provider } from 'react-redux';
 import store from './components/Reducer/Store';
 import Main from './components/Main/Main';
+import Docs from './components/Docs/Docs';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<Main/>} />
+          <Route path='/docs' element={<Docs/>} />
           <Route path='/room' element={<CreateRoom />} />
           <Route path='/room/:roomName/:name' element={<Home />} />
         </Routes>
