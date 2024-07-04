@@ -1,0 +1,41 @@
+.main-overlay {
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80vh;
+    color: rgb(255 255 255 / 92%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-content{
+    padding: 1rem;
+}
+
+.main-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+}
+
+.main-button{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    width: 5rem;
+    height: 3rem;
+    background-color: rgb(73, 69, 69);
+    color: rgb(255, 255, 255);
+    justify-content: center;
+    transition: transform 0.5s ease-in-out;
+    cursor: pointer;
+    border-radius: 0.8em;
+}
+
+.main-button:hover{
+    transform: scale(1.2);
+}

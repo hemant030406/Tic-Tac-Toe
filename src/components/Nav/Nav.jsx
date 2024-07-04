@@ -28,14 +28,18 @@ const Nav = (props) => {
         transform: isdelHovered ? 'scale(1.2)' : 'scale(1)',
     };
 
+    //rgb(100 15 85 / 24%)
+
     return (
-        <nav className="navbar" style={{ padding: 0, backgroundColor: 'rgb(100 15 85 / 24%)' }}>
+        <nav className="navbar" style={{ padding: 0, backgroundColor: props.color, zIndex: 999 }}>
             <div className="container-fluid" style={{ paddingLeft: 0, paddingRight: '10px' }}>
-                <div style={{ backgroundImage: 'url(/images/logo.png)', float: 'left', width: '150px', height: '80px', backgroundSize: 'cover' }}></div>
-                <div style={{float:'right', display: 'flex', flex:'row', gap:'2rem'}}>
-                    <MdDelete  size={50} color='#00b1ffdb' style={delStyle} onMouseOver={() => setIsDelHovered(true)} onMouseOut={() => setIsDelHovered(false)} onClick={props.del}/>
-                    <SiGooglemessages size={50} color='#00b1ffdb' onClick={() => handleVisibility()} onMouseOver={() => setIsChatHovered(true)} onMouseOut={() => setIsChatHovered(false)} style={chatStyle} />
-                </div>
+                <div style={{ backgroundImage: 'url(/images/logo.png)', float: 'left', width: '150px', height: '80px', backgroundSize: 'cover', zIndex: 999 }}></div>
+                {
+                    props.icons &&
+                    <div style={{ float: 'right', display: 'flex', flex: 'row', gap: '2rem', zIndex: 999 }}>
+                        <MdDelete size={50} color='#00b1ffdb' style={delStyle} onMouseOver={() => setIsDelHovered(true)} onMouseOut={() => setIsDelHovered(false)} onClick={props.del} />
+                        <SiGooglemessages size={50} color='#00b1ffdb' onClick={() => handleVisibility()} onMouseOver={() => setIsChatHovered(true)} onMouseOut={() => setIsChatHovered(false)} style={chatStyle} />
+                    </div>}
             </div>
         </nav>
     )

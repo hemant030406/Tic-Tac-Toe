@@ -2,7 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 85vh;
+  height: 70vh;
+  width: 100vw;
+  position: absolute;
 }
 
 table,
@@ -14,6 +16,10 @@ td {
   height: 6rem;
   width: 6rem;
   cursor: pointer;
+  color: white;
+  text-align: center;
+  font-size: 250%;
+  font-weight: 500;
 }
 
 .cross,
@@ -61,10 +67,6 @@ td {
 }
 
 @media screen and (max-width:400px) {
-  /* td{
-    height: 4rem;
-    width: 4rem;
-  } */
   .res input[type='submit'] {
   background-color: rgb(251 220 0);
   border: 2px solid rgb(251 220 0);

@@ -6,15 +6,35 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 30rem;
-  height: 40rem;
-  background-color: rgb(234 195 183 / 27%);
-  padding-top: 2rem;
-  justify-content: flex-end
+  min-width: 18.5rem;
+  max-width: 20rem;
+  min-height: 35rem;
+  max-height: 40rem;
+  background-color: rgb(229 167 148 / 76%);
+  margin-top: 2rem;
+  justify-content: flex-end;
+  border-radius: 1rem;
+  border: 1.5px solid rgb(176, 176, 176);
+  z-index: 999;
 }
 
 .chat-container.hidden {
   height: 0;
   opacity: 0;
-  overflow: hidden;
+  display: none;
+}
+
+.msghistory::-webkit-scrollbar {
+  display: none;
+}
+.msghistory {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.chat-msg input::placeholder{
+  color: rgb(220, 220, 220);
+}
+.chat-msg input:focus{
+  outline: none;
 }
