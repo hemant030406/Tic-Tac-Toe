@@ -4,6 +4,8 @@ import Fetch from "../Fetch/Fetch";
 import { URL } from "../Utils/Utils"
 import Alert from "./Alert";
 import Nav from "../Nav/Nav";
+import { useDispatch } from "react-redux";
+import { setUsers } from "../Reducer/Reducers";
 
 const CreateRoom = () => {
 
@@ -14,6 +16,8 @@ const CreateRoom = () => {
     const [alert, setAlert] = useState(null)
 
     let nav = useNavigate()
+
+    const dispatch = useDispatch()
 
     const showAlert = (msg, type) => {
         setAlert({
@@ -51,6 +55,7 @@ const CreateRoom = () => {
             let data = await Fetch(URL + opt, body, 'POST')
             if (data.ok) {
                 if (opt == 'join') {
+                    dispatch(setUsers(name))
                     nav(`/room/${roomName}/${name}`)
                 }
                 else {

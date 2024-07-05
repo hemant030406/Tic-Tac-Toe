@@ -17,6 +17,7 @@
 .main-buttons{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 3rem;
 }
 
@@ -38,4 +39,10 @@
 
 .main-button:hover{
     transform: scale(1.2);
+}
+
+@media screen and (max-width: 400px) {
+    .main-buttons{
+        gap: 0.5rem;
+    }
 }

@@ -1,23 +1,29 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Nav from '../Nav/Nav'
 import { useSelector } from 'react-redux'
 import './Chat.css'
 import Message from './Message'
 import { GrSend } from "react-icons/gr";
 import { FaArrowDown } from "react-icons/fa6";
 import { useParams } from 'react-router-dom'
+import { BsPeopleFill } from "react-icons/bs";
 
 const Chat = (props) => {
 
-  const visible = useSelector(state => state.visibilityReducer.visible)
+  const chatVisible = useSelector(state => state.visibilityReducer.visible)
 
-  const msges = useSelector(state => state.msg.msges)
+  const [membersVisible,setMembersVisible] = useState(false)
+
+  const msges = useSelector(state => state.reducers.msges)
+
+  const users = useSelector(state => state.reducers.users)
 
   const { name } = useParams()
 
   const [msg, setMsg] = useState('')
 
   const [atBottom, setAtBottom] = useState(false)
+
+  const [memberHovered,setMemberHovered] = useState(false)
 
   const msghistory = useRef(null);
 
@@ -36,13 +42,57 @@ const Chat = (props) => {
 
   const getScrollPosition = () => {
     if (msghistory.current) {
-      const { scrollTop,scrollHeight,clientHeight } = msghistory.current;
+      const { scrollTop, scrollHeight, clientHeight } = msghistory.current;
       setAtBottom(Math.ceil(scrollHeight - scrollTop) === clientHeight)
     }
   };
-  
+
+  const showMembers = () => {
+    if(chatVisible){
+      !membersVisible ? setMembersVisible(true) : setMembersVisible(false)
+    }
+  }
+
+  const Users = [
+    'hemant','hemu','hp','alonot',
+    'hemant','hemu','hp','alonot',
+    'hemant','hemu','hp','alonot',
+    'hemant','hemu','hp','alonot',
+    'hemant','hemu','hp','alonot',
+    'hemant','hemu','hp','alonot',
+  ]
+
+  useEffect(()=>{
+    if(!chatVisible){
+      setMembersVisible(false)
+    }
+  },[chatVisible])
+
+  const memberStyle = {
+        transition: 'transform 0.6s',
+        cursor: 'pointer',
+        transform: memberHovered ? 'scale(1.4)' : 'scale(1)',
+        margin: '0.4rem',
+        zIndex: 1000
+    };
+
   return (
-    <div className={`chat-container ${visible ? '' : 'hidden'}`}>
+    <>
+    <div className={`chat-container ${chatVisible ? '' : 'hidden'}`}>
+      <div className={`members ${chatVisible && membersVisible ? '' : 'hidden'}`} style={{backgroundColor:'#00000099', position:'absolute', right:0, marginTop:0, paddingTop:'3rem', overflowY:'scroll'}}>
+      <ul style={{listStyle:'none',color:'white'}}>
+      {
+        users.map((username,id) =>
+          <li key={id}>{username}</li>
+        )
+      }
+      </ul>
+      </div>
+      <div className={`chat-head ${chatVisible ? '' : 'hidden'}`}>
+        <h3 className={`${chatVisible ? '' : 'hidden'}`} style={{ color: 'white' }}>Chat</h3>
+        <BsPeopleFill className={`${chatVisible ? '' : 'hidden'}`} size={25} color='white' style={memberStyle} onMouseOver={()=>setMemberHovered(true)} onMouseOut={() => setMemberHovered(false)} onClick={()=>showMembers()} />
+      </div>
+      <div className={`${chatVisible ? '' : 'hidden'}`} style={{height:'26rem',display:'flex',flexDirection:'column',justifyContent:'flex-end'}}>
       <div ref={msghistory} className="msghistory" style={{ overflowY: 'scroll' }} onScroll={getScrollPosition}>
         {
           msges.map((obj, id) => {
@@ -56,15 +106,16 @@ const Chat = (props) => {
           )
         }
       </div>
+      </div>
       {
         !atBottom &&
-        <div style={{display: 'flex',flexDirection: 'row',justifyContent: 'flex-end'}}>
+        <div className={`${chatVisible ? '' : 'hidden'}`} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
           <div id='uparrow' className='btn btn-outline-light' style={{ marginBottom: '0.5rem', marginRight: '1rem', width: '2rem', display: 'flex', justifyContent: 'center' }} onClick={() => scrolltoBottom()}>
             <FaArrowDown />
           </div>
         </div>
       }
-      <div className='chat-msg' style={{ display: 'flex', flexDirection: 'row', gap: '0.2rem', margin: '0.2rem' }}>
+      <div className={`chat-msg ${chatVisible ? '' : 'hidden'}`} style={{ display: 'flex', flexDirection: 'row', gap: '0.2rem', margin: '0.2rem' }}>
         <input
           value={msg}
           onChange={
@@ -79,10 +130,8 @@ const Chat = (props) => {
             }
           }
           id='msg'
-          placeholder='Message'
-          style={
-            { paddingLeft: '5px', height: '3rem', width: '100%', backgroundColor: 'transparent', border: '1px solid rgb(220, 220, 220)', borderRadius: '1rem', color: 'white' }
-          }>
+          className='chat-input'
+          placeholder='Message'>
         </input>
         <div className='btn btn-outline-light' onClick={() => {
           props.send(msg)
@@ -92,6 +141,7 @@ const Chat = (props) => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import VisibilityReducer from "./VisibilityReducer";
-import msgReducer from "./msgReducer";
+import Reducer from "./Reducers";
 
 const store = configureStore({
     reducer: {
         visibilityReducer: VisibilityReducer,
-        msg: msgReducer
+        reducers: Reducer
     }
 })
 

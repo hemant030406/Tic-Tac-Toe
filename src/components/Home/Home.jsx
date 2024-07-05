@@ -7,7 +7,7 @@ import Table from './Table';
 import Nav from '../Nav/Nav';
 import Chat from '../Chat/Chat';
 import { useDispatch } from 'react-redux';
-import { setMsges } from '../Reducer/msgReducer';
+import { setMsges, setUsers, deleteUser } from '../Reducer/Reducers';
 import Alert from '../CreateRoom/Alert';
 
 const Home1 = () => {
@@ -61,6 +61,7 @@ const Home1 = () => {
     }
 
     const update = (e) => {
+        console.log('hello')
         let id = e.currentTarget.id;
         setCall(call == 0 ? 1 : 0);
         wsSend(id, 'move', '')
@@ -94,6 +95,7 @@ const Home1 = () => {
         let moves = data.moves;
         let scores = data.scores;
         let msges = data.msges;
+        let users = data.users;
         setMoves(moves)
         setTurn(moves['lastTurn'] == 'O' ? 'X' : 'O')
         setscoreO(scores['O'])
@@ -114,6 +116,9 @@ const Home1 = () => {
             }))
         }
         )
+        users.map(user => {
+            dispatch(setUsers(user))
+        })
     }
 
     const reset = () => {
@@ -128,9 +133,21 @@ const Home1 = () => {
         wsSend('', action, '')
         let body = {
             action: action,
-            room: roomName
+            room: roomName,
+            name: name
         }
         await Fetch(URL + 'delete', JSON.stringify(body), 'POST')
+    }
+
+    const leave = async (action) => {
+        wsSend('', action, '')
+        let body = {
+            action: action,
+            room: roomName,
+            name: name
+        }
+        await Fetch(URL + 'leave', JSON.stringify(body), 'POST')
+        window.location.reload()
     }
 
     const chat = (msg) => {
@@ -153,18 +170,22 @@ const Home1 = () => {
                     clearTimeout(timeoutId);
                     timeoutId = setTimeout(() => {
                         retrieveMoves(completedata);
-                    }, 300);
+                    }, 700);
                 }
                 else {
                     if (completedata.ok && completedata.action == 'move') {
                         let data = completedata.data;
                         updateBoard(data)
                     }
+                    else if (!completedata.ok && completedata.action == 'move') {
+                        showAlert(completedata.reason, 'Warning')
+                    }
                     else if (completedata.action == 'new joinee') {
+                        dispatch(setUsers(completedata.name))
                         clearTimeout(timeoutId1);
                         timeoutId1 = setTimeout(() => {
                             showAlert(` ${completedata.name} has joined`, 'Success')
-                        }, 300);
+                        }, 700);
                     }
                     else if (completedata.action == 'reset') {
                         setMoves({})
@@ -181,6 +202,11 @@ const Home1 = () => {
                     }
                     else if (completedata.action == 'delete') {
                         window.location.reload()
+                        showAlert(' Invalid. You can only leave the room, cannot delete.', 'Warning')
+                    }
+                    else if (completedata.action == 'leave') {
+                        dispatch(deleteUser(completedata.data.name))
+                        showAlert(` ${completedata.data.name} has left`, 'Warning')
                     }
                     else if (completedata.action == 'chat') {
                         dispatch(setMsges({
@@ -197,28 +223,26 @@ const Home1 = () => {
         }
     }, [call])
 
-    //rgb(100 15 85 / 24%)
-
     return (
         <>
-            <Nav del={() => del('delete')} icons={true} color={'transparent'} />
-            <div style={{ height: '2rem', marginTop: '1rem',display:'inline-block' }}>
+            <Nav del={() => del('delete')} leave={()=>leave('leave')} icons={true} color={'transparent'} />
+            <div style={{ height: '2rem', marginTop: '1rem', display: 'inline-block' }}>
                 <Alert alert={alert} />
             </div>
-                <Chat send={msg => chat(msg)} />
-                <div className="tblayout">
-                    <div className="tb">
-                        <div id="score">
-                            <div className="scoreO" style={{ color: Turn == 'O' ? '#9ee00f' : 'red' }}>O: {scoreO}</div>
-                            <div className="scoreX" style={{ color: Turn == 'X' ? '#9ee00f' : 'red' }}>X: {scoreX}</div>
-                        </div>
-                        <Table update={update}></Table>
-                        <div className="res">
-                            <button className="btn btn-outline-warning btn-lg" style={{ fontSize: '175%', fontWeight: '500', borderRadius: '3rem', borderWidth: '2px' }} type="submit" value={'Reset'} onClick={() => { reset() }}> Reset </button>
-                            <button className="btn btn-outline-warning btn-lg" type="submit" value={'Undo'} onClick={() => { undo() }} style={{ fontSize: '175%', fontWeight: '500', borderRadius: '2rem', borderWidth: '2px' }}> Undo</button>
-                        </div>
+            <Chat send={msg => chat(msg)} />
+            <div className="tblayout">
+                <div className="tb">
+                    <div id="score">
+                        <div className="scoreO" style={{ color: Turn == 'O' ? '#9ee00f' : 'red' }}>O: {scoreO}</div>
+                        <div className="scoreX" style={{ color: Turn == 'X' ? '#9ee00f' : 'red' }}>X: {scoreX}</div>
+                    </div>
+                    <Table update={update}></Table>
+                    <div className="res">
+                        <button className="btn btn-outline-warning btn-lg" style={{ fontSize: '175%', fontWeight: '500', borderRadius: '3rem', borderWidth: '2px' }} type="submit" value={'Reset'} onClick={() => { reset() }}> Reset </button>
+                        <button className="btn btn-outline-warning btn-lg" type="submit" value={'Undo'} onClick={() => { undo() }} style={{ fontSize: '175%', fontWeight: '500', borderRadius: '2rem', borderWidth: '2px' }}> Undo</button>
                     </div>
                 </div>
+            </div>
         </>
     )
 }
