@@ -69,9 +69,8 @@ const Chat = (props) => {
     };
 
   return (
-    <>
     <div className={`chat-container ${chatVisible ? '' : 'hidden'}`}>
-      <div className={`members ${chatVisible && membersVisible ? '' : 'hidden'}`} style={{backgroundColor:'#00000099', position:'absolute', right:0, marginTop:0, paddingTop:'3rem', overflowY:'scroll'}}>
+      <div className={`members ${membersVisible && chatVisible ? '' : 'hidden'}`} style={{backgroundColor:'#00000099', position:'absolute', right:0, marginTop:0, paddingTop:'3rem', overflowY:'scroll'}}>
       <ul style={{listStyle:'none',color:'white'}}>
       {
         users.map((username,id) =>
@@ -80,11 +79,11 @@ const Chat = (props) => {
       }
       </ul>
       </div>
-      <div className={`chat-head ${chatVisible ? '' : 'hidden'}`}>
-        <h3 className={`${chatVisible ? '' : 'hidden'}`} style={{ color: 'white' }}>Chat</h3>
-        <BsPeopleFill className={`${chatVisible ? '' : 'hidden'}`} size={25} color='white' style={memberStyle} onMouseOver={()=>setMemberHovered(true)} onMouseOut={() => setMemberHovered(false)} onClick={()=>showMembers()} />
+      <div className={`chat-head`}>
+        <h3 style={{ color: 'white' }}>Chat</h3>
+        <BsPeopleFill size={25} color='white' style={memberStyle} onMouseOver={()=>setMemberHovered(true)} onMouseOut={() => setMemberHovered(false)} onClick={()=>showMembers()} />
       </div>
-      <div className={`${chatVisible ? '' : 'hidden'}`} style={{height:'26rem',display:'flex',flexDirection:'column',justifyContent:'flex-end'}}>
+      <div style={{height:'26rem',display:'flex',flexDirection:'column',justifyContent:'flex-end'}}>
       <div ref={msghistory} className="msghistory" style={{ overflowY: 'scroll' }} onScroll={getScrollPosition}>
         {
           msges.map((obj, id) => {
@@ -101,13 +100,13 @@ const Chat = (props) => {
       </div>
       {
         !atBottom &&
-        <div className={`${chatVisible ? '' : 'hidden'}`} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
           <div id='uparrow' className='btn btn-outline-light' style={{ marginBottom: '0.5rem', marginRight: '1rem', width: '2rem', display: 'flex', justifyContent: 'center' }} onClick={() => scrolltoBottom()}>
             <FaArrowDown />
           </div>
         </div>
       }
-      <div className={`chat-msg ${chatVisible ? '' : 'hidden'}`} style={{ display: 'flex', flexDirection: 'row', gap: '0.2rem', margin: '0.2rem' }}>
+      <div className={`chat-msg`} style={{ display: 'flex', flexDirection: 'row', gap: '0.2rem', margin: '0.2rem' }}>
         <input
           value={msg}
           onChange={
@@ -133,7 +132,6 @@ const Chat = (props) => {
         </div>
       </div>
     </div>
-    </>
   )
 }
 

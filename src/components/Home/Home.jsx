@@ -61,7 +61,6 @@ const Home1 = () => {
     }
 
     const update = (e) => {
-        console.log('hello')
         let id = e.currentTarget.id;
         setCall(call == 0 ? 1 : 0);
         wsSend(id, 'move', '')
