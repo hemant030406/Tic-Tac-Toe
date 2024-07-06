@@ -11,14 +11,14 @@ const chatSlice = createSlice({
     reducers: {
         setMsges: (state, action) => {
             if(state.msges.length == 0){
-                state.msges.push(action.payload);
+                state.msges = [...state.msges, action.payload];
             }
             else if(action.payload.time != state.msges.slice(-1)[0].time){
-                state.msges.push(action.payload);
+                state.msges = [...state.msges, action.payload];
             }
         },
         setUsers: (state, action) => {
-            state.users.push(action.payload)
+            state.users = [...state.users, action.payload];
         },
         deleteUser: (state, action) => {
             state.users = state.users.filter(user => user !== action.payload)

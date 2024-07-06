@@ -40,6 +40,7 @@ const Chat = (props) => {
     }
   }, [msges]);
 
+
   const getScrollPosition = () => {
     if (msghistory.current) {
       const { scrollTop, scrollHeight, clientHeight } = msghistory.current;
@@ -52,15 +53,6 @@ const Chat = (props) => {
       !membersVisible ? setMembersVisible(true) : setMembersVisible(false)
     }
   }
-
-  const Users = [
-    'hemant','hemu','hp','alonot',
-    'hemant','hemu','hp','alonot',
-    'hemant','hemu','hp','alonot',
-    'hemant','hemu','hp','alonot',
-    'hemant','hemu','hp','alonot',
-    'hemant','hemu','hp','alonot',
-  ]
 
   useEffect(()=>{
     if(!chatVisible){

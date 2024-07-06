@@ -60,9 +60,7 @@ const CreateRoom = () => {
                 }
                 else {
                     showAlert('Room has been created.', 'Success')
-                    setCode('')
-                    setroomName('')
-                    setName('')
+                    setOpt('join')
                 }
             }
             else {
