@@ -1,7 +1,7 @@
 # Tic-Tac-Toe
 This is a website where anyone can play the Tic Tac Toe game
 # Website Link
-The website : [Tic-Tac-Toe](https://tictactoe-x576.onrender.com/)
+The website : [Tic-Tac-Toe](https://tictactoe-hp.vercel.app/)
 
 # Getting Started with Create React App
 
