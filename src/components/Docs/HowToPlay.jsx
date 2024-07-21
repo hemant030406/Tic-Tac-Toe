@@ -36,6 +36,7 @@ const HowToPlaySection = () => {
         <h3>Game Setup</h3>
         <p>The first player to join the room will be assigned as "O" (Circle).</p>
         <p>The second player to join will be assigned as "X" (Cross).</p>
+        <p>Other joinees can only watch the game and chat. If an active player leaves the room, the other joinees will be assigned as previous player's symbol in FIFO order.</p>
         <CodeSnippet language="javascript">
           {`
           // Example logic to assign symbols based on joining order
@@ -64,8 +65,8 @@ const HowToPlaySection = () => {
         <h3>Chat Functionality</h3>
         <p>Click on the chat icon located in the top right corner of the game screen.</p>
         <p>A chat box will appear where players can exchange messages.</p>
-        <p>Messages sent by the current player will be aligned to the right side.</p>
-        <p>Messages sent by the opponent will be aligned to the left side.</p>
+        <p>Messages sent by the current player will be aligned to the right side with greenish bg color.</p>
+        <p>Messages sent by the opponent will be aligned to the left side with greyish bg color.</p>
         <CodeSnippet language="javascript">
           {`
           // Example frontend implementation of chat functionality
@@ -90,9 +91,24 @@ const HowToPlaySection = () => {
       </div>
 
       <div className="how-to-play-step">
+        <h3>Leaving the Room</h3>
+        <p>Click on the cross icon located in the top right corner of the game screen.</p>
+        <p>You will be out of the room.</p>
+        <CodeSnippet language="javascript">
+          {`
+          // Example logic to delete a room
+          const leaveRoom = (room) => {
+              // Code to delete a room
+          }
+          `}
+        </CodeSnippet>
+      </div>
+
+      <div className="how-to-play-step">
         <h3>Exiting the Room</h3>
         <p>Click on the delete icon located in the top right corner of the game screen.</p>
         <p>The room will be deleted and both of you will be out of the game.</p>
+        <p><span style={{fontWeight: 500}}>Note:</span> You can only delete the room if you are an active player i.e., you are assigned either with "X" or "O".</p>
         <CodeSnippet language="javascript">
           {`
           // Example logic to delete a room
